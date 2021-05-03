@@ -4,14 +4,11 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
-
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
-
 const ObjectID = require('mongodb').ObjectID;
-
 const app = express();
-// app.engine('pug', require('pug').__express);
+const LocalStrategy = require('passport-local');
 
 fccTesting(app); //For FCC testing purposes
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -60,6 +57,26 @@ myDB(async client => {
       done(null, doc);
     });
   });
+
+  // https://www.passportjs.org/packages/passport-local/
+  passport.use(
+    new LocalStrategy(function (username, password, done) {
+      myDataBase.findOne({ username: username }, function (err, user) {
+        console.log('User ' + username + ' attempted to log in.');
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false);
+        }
+        if (password !== user.password) {
+          return done(null, false);
+        }
+        return done(null, user);
+      });
+    })
+  );
+
   // Be sure to add this...
 }).catch(e => {
   app.route('/').get((req, res) => {
