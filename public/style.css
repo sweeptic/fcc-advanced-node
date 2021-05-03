@@ -33,19 +33,19 @@ form {
 form input {
   background-color: #eee;
   border: green solid 2px;
-  padding: 10px; 
-  width: 90%; 
-  margin-right: .5%;
+  padding: 10px;
+  width: 90%;
+  margin-right: 0.5%;
 }
 
-form button { 
+form button {
   width: 9%;
   background: rgb(130, 224, 255);
-  border: none; 
-  padding: 10px; 
+  border: none;
+  padding: 10px;
 }
 
-#messages { 
+#messages {
   list-style-type: none;
   text-align: left;
   margin: 0;
@@ -55,10 +55,10 @@ form button {
   overflow-x: hidden;
 }
 
-#messages li { 
+#messages li {
   padding: 5px 10px;
 }
 
-#messages li:nth-child(odd) { 
+#messages li:nth-child(odd) {
   background: #eee;
 }
