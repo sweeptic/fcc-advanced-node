@@ -49,7 +49,7 @@ myDB(async client => {
       }
     );
 
-  app.route('/profile').get((req, res) => {
+  app.route('/profile').get(ensureAuthenticated, (req, res) => {
     res.render(process.cwd() + '/views/pug/profile');
   });
 
@@ -98,8 +98,15 @@ myDB(async client => {
     res.render('pug', { title: e, message: 'Unable to login' });
   });
 });
-// app.listen out here...
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+}
+
+// app.listen out here...
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log('Listening on port ' + PORT);
