@@ -7,7 +7,6 @@ const passport = require('passport');
 
 const myDB = require('./connection');
 const fccTesting = require('./freeCodeCamp/fcctesting.js');
-const session_secret = process.env.SESSION_SECRET;
 
 const app = express();
 // app.engine('pug', require('pug').__express);
@@ -19,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: session_secret,
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false },
