@@ -37,12 +37,10 @@ myDB(async client => {
   const myDataBase = await client.db('fcc-advancednode').collection('users');
 
   /********************************************************************************************** */
-  
-  
+
   route(app, myDataBase);
-  
+
   auth(app, myDataBase);
-  
 
   /********************************************************************************************** */
 
