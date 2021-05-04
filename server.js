@@ -38,7 +38,7 @@ myDB(async client => {
 
   /********************************************************************************************** */
 
-  route(app, myDataBase);
+  routes(app, myDataBase);
 
   auth(app, myDataBase);
 
