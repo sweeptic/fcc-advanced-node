@@ -37,6 +37,7 @@ myDB(async client => {
       title: 'Connected to Database',
       message: 'Please login',
       showLogin: true,
+      username: req.user.username,
     });
   });
 
