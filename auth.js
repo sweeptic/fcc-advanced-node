@@ -5,7 +5,9 @@ const ObjectID = require('mongodb').ObjectID;
 const GitHubStrategy = require('passport-github').Strategy;
 
 module.exports = function (app, myDataBase) {
-  // Serialization and deserialization here...
+
+
+
   passport.serializeUser((user, done) => {
     done(null, user._id);
   });
@@ -34,9 +36,7 @@ module.exports = function (app, myDataBase) {
     })
   );
 
-  passport.use(
-    new GitHubStrategy(
-      {
+  passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
         callbackURL:'https://hattila-fcc-advancednode.herokuapp.com/auth/github/callback',
@@ -47,4 +47,6 @@ module.exports = function (app, myDataBase) {
       }
     )
   );
+
+
 };
