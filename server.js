@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const ObjectID = require('mongodb').ObjectID;
 const LocalStrategy = require('passport-local');
+const bcrypt = require('bcrypt');
 
 const app = express();
 fccTesting(app); // For fCC testing purposes
@@ -32,7 +33,7 @@ app.use(passport.session());
 /********************************************************************************************** */
 
 myDB(async client => {
-  const myDataBase = await client.db('database').collection('users');
+  const myDataBase = await client.db('fcc-advancednode').collection('users');
 
   // Be sure to change the title
   app.route('/').get((req, res) => {
@@ -67,6 +68,8 @@ myDB(async client => {
 
   app.route('/register').post(
     (req, res, next) => {
+      const hash = bcrypt.hashSync(req.body.password, 12);
+
       myDataBase.findOne({ username: req.body.username }, function (err, user) {
         if (err) {
           next(err);
@@ -74,7 +77,7 @@ myDB(async client => {
           res.redirect('/');
         } else {
           myDataBase.insertOne(
-            { username: req.body.username, password: req.body.password },
+            { username: req.body.username, password: hash },
             (err, doc) => {
               if (err) {
                 res.redirect('/');
@@ -118,7 +121,8 @@ myDB(async client => {
         if (!user) {
           return done(null, false);
         }
-        if (password !== user.password) {
+        // if (password !== user.password) {
+        if (!bcrypt.compareSync(password, user.password)) {
           return done(null, false);
         }
         return done(null, user);

@@ -10,6 +10,7 @@
     "./public/*"
   ],
   "env": {
+    "PORT": 3000,
     "NODE_ENV": "development",
     "SESSION_SECRET": "abc",
     "MONGO_URI": "mongodb+srv://fcc-olive4:gI2WKqT6WLC5lGUv@cluster0.khhwa.mongodb.net/fcc-advancednode?retryWrites=true&w=majority"
