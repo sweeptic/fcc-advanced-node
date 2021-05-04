@@ -3,6 +3,10 @@ $(document).ready(function () {
   /* Global io */
   let socket = io();
  //  io.connect('https://hattila-fcc-advancednode.herokuapp.com/')
+ 
+  socket.on('user count', function (data) {
+    console.log(data);
+  });
 
   // Form submittion with new message in field with id 'm'
   $('form').submit(function () {
