@@ -13,8 +13,12 @@ const routes = require('./routes');
 const auth = require('./auth');
 
 const app = express();
-fccTesting(app); // For fCC testing purposes
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 
+
+
+fccTesting(app); // For fCC testing purposes
 app.set('view engine', 'pug');
 
 app.use('/public', express.static(process.cwd() + '/public'));
@@ -42,6 +46,10 @@ myDB(async client => {
 
   auth(app, myDataBase);
 
+  io.on('connection', (socket) => {
+    console.log('A user has connected');
+  });
+
   /********************************************************************************************** */
 
   // Be sure to add this...
@@ -52,7 +60,7 @@ myDB(async client => {
 });
 
 // app.listen out here...
-
-app.listen(process.env.PORT || 3000, () => {
+// app.listen....
+http.listen(process.env.PORT || 3000, () => {
   console.log('Listening on port ' + process.env.PORT);
 });
