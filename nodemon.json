@@ -12,7 +12,6 @@
   "env": {
     "GITHUB_CLIENT_ID": "069410367fb04e4af852",
     "GITHUB_CLIENT_SECRET": "d8a1465455c1df47ab9995305807198f663fc483",
-    "GITHUB_CLIENT_CALLBACK_URL": "https://hattila-fcc-advancednode.herokuapp.com/auth/github/callback",
     "PORT": 3000,
     "NODE_ENV": "development",
     "SESSION_SECRET": "abc",
